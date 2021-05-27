@@ -1,8 +1,9 @@
 import os, csv
 
 def main():
+    ## get current working directory
     directory_path = os.getcwd() + '/'
-    print('My current directory is: ' + directory_path)
+    print('My current working directory is: ' + directory_path)
 
     ## import photo directory into listdir
     path = directory_path + 'Photographs to Rename'
