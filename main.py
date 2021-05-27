@@ -2,17 +2,16 @@ import os, csv
 
 def main():
     ## get current working directory
-    directory_path = os.getcwd() + '/'
-    print('My current working directory is: ' + directory_path)
+    base_path = os.getcwd()
 
     ## import photo directory into listdir
-    path = directory_path + 'Photographs to Rename'
+    path = os.path.join(os.getcwd(), 'Photographs to Rename')
     file_extension = '.bmp'
     items = os.listdir(path)
 
 
     ## csv handling
-    csv_open = open(directory_path+'data.csv','r')
+    csv_open = open(os.path.join(base_path, 'data.csv'),'r')
     csv_read = csv.reader(csv_open, delimiter=',')
     next(csv_read) ## skip the first row.
 
@@ -33,7 +32,8 @@ def main():
             ## record[2] is the adno column
             if record[2] == photograph:
                 ## rename files if they match
-                os.rename(path+'/'+photograph+file_extension,path+'/'+record[0]+' '+record[1]+file_extension)
+                os.chdir(path)
+                os.rename(photograph+file_extension,record[0]+' '+record[1]+file_extension)
 
 
     csv_open.close() #close csv when finished.
